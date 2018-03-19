@@ -1,4 +1,4 @@
-package sudoku.domain.cell;
+package sudoku.domain;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,12 +9,12 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CellTest {
+public class StandardCellTest {
 
     @Test
     public void shouldCreateCell() {
 
-        Cell cell = new Cell();
+        Cell cell = new StandardCell();
 
         assertThat(cell.isSolved())
                 .isFalse();
@@ -23,7 +23,7 @@ public class CellTest {
     @Test
     public void shouldRemovePossibleValue() {
 
-        Cell cell = new Cell();
+        StandardCell cell = new StandardCell();
 
         cell.removePossibility(1);
 
@@ -34,7 +34,7 @@ public class CellTest {
     @Test
     public void shouldSolveWhenRemovingAllOtherPossibilities() {
 
-        Cell cell = new Cell();
+        Cell cell = new StandardCell();
 
         removePossibilities(cell, 1, 2, 3, 4, 5, 6, 7, 8);
 
@@ -47,7 +47,7 @@ public class CellTest {
 
         CellSolvedListener mockNotifyListener = mock(CellSolvedListener.class);
 
-        Cell cell = new Cell();
+        Cell cell = new StandardCell();
         cell.addListener(mockNotifyListener);
 
         removePossibilities(cell, 1, 2, 3, 4, 5, 6, 7, 8);
@@ -59,7 +59,7 @@ public class CellTest {
     @Test(expected = IllegalArgumentException.class)
     public void shouldNotBeAbleToRemoveAllPossibilities() {
 
-        Cell cell = new Cell();
+        Cell cell = new StandardCell();
 
         removePossibilities(cell, 1, 2, 3, 4, 5, 6, 7, 8, 9);
     }
@@ -68,7 +68,7 @@ public class CellTest {
     public void shouldSolveInstantly() {
 
         CellSolvedListener mockNotifyListener = mock(CellSolvedListener.class);
-        Cell cell = new Cell();
+        Cell cell = new StandardCell();
         cell.addListener(mockNotifyListener);
 
         cell.solve(1);

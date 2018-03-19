@@ -1,19 +1,20 @@
-package sudoku.domain.cell;
+package sudoku.domain;
 
 import java.util.*;
 
 /**
- * Presents single cell in Sudoku grid which either is solved or not. In the beginning possible values for cell are 1 through 9. When cells are being solved, possibilities will be reduced.
+ * Presents single cell in basic Sudoku board which either is solved or not. In the beginning possible values for cell are 1 through 9. When cells are being solved, possibilities will be reduced.
  */
-public class Cell {
+public class StandardCell implements Cell {
 
     private final List<Integer> possibilities;
     private Collection<CellSolvedListener> listeners = new ArrayList<>();
 
-    public Cell() {
+    StandardCell() {
         this.possibilities = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
     }
 
+    @Override
     public void removePossibility(Integer number) {
 
         if (isSolved()) {
@@ -34,14 +35,16 @@ public class Cell {
         return this.possibilities.get(0);
     }
 
+    @Override
     public boolean isSolved() {
         return possibilities.size() == 1;
     }
 
-    public Collection<Integer> getPossibilities() {
+    Collection<Integer> getPossibilities() {
         return Collections.unmodifiableCollection(this.possibilities);
     }
 
+    @Override
     public void solve(int number) {
 
         this.possibilities.removeIf(possibility -> possibility != number);
@@ -49,6 +52,7 @@ public class Cell {
         notifyListeners();
     }
 
+    @Override
     public void addListener(CellSolvedListener listener) {
         this.listeners.add(listener);
     }

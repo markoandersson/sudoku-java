@@ -1,4 +1,4 @@
-package sudoku.domain.cell;
+package sudoku.domain;
 
 /**
  * Interface for listener which will be notified when some cell's value has been solved.
