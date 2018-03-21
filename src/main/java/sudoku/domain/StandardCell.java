@@ -41,6 +41,9 @@ public class StandardCell implements Cell {
     }
 
     public Collection<Integer> getPossibilities() {
+        if (isSolved()) {
+            return Collections.emptyList();
+        }
         return Collections.unmodifiableCollection(this.possibilities);
     }
 
