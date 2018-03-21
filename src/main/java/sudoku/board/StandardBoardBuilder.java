@@ -1,9 +1,7 @@
 package sudoku.board;
 
 import sudoku.domain.Cell;
-import sudoku.domain.Row;
 import sudoku.domain.StandardCell;
-import sudoku.domain.StandardRow;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,19 +9,19 @@ import java.util.List;
 public class StandardBoardBuilder {
 
 
-    private List<Row> rows = new ArrayList<>();
+    private List<List<Cell>> rows = new ArrayList<>();
 
     public StandardBoardBuilder withRow(String rowAsString) {
         String[] numbers = rowAsString.split("|,");
 
-        Row row = buildRow(numbers);
+        List<Cell> row = buildRow(numbers);
 
         rows.add(row);
 
         return this;
     }
 
-    private Row buildRow(String[] numbers) {
+    private List<Cell> buildRow(String[] numbers) {
         List<Cell> cells = new ArrayList<>();
         for (String number : numbers) {
 
@@ -37,7 +35,7 @@ public class StandardBoardBuilder {
                 cells.add(cell);
             }
         }
-        return new StandardRow(cells);
+        return cells;
     }
 
     public StandardBoard build() {

@@ -3,6 +3,7 @@ package sudoku.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.util.Collections.unmodifiableCollection;
 
@@ -36,4 +37,17 @@ public abstract class AbstractGroupOfCells implements CellSolvedListener, GroupO
 
         solver.solve(unmodifiableCollection(this.cells));
     }
+
+    @Override
+    public boolean isSolved() {
+        return this.cells.stream().allMatch(Cell::isSolved);
+    }
+
+    @Override
+    public String toString() {
+        return this.cells.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(","));
+    }
+
 }
