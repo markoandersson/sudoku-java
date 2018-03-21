@@ -64,4 +64,9 @@ public class StandardCell implements Cell {
     public void addListener(CellSolvedListener listener) {
         this.listeners.add(listener);
     }
+
+    @Override
+    public String toString() {
+        return isSolved() ? String.valueOf(getCellNumber()) : " ";
+    }
 }

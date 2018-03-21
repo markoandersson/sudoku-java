@@ -9,11 +9,15 @@ import static java.util.Collections.unmodifiableCollection;
 /**
  * Abstract row which contains generic functionality for row, not dependent on exact type of game board.
  */
-public abstract class AbstractRow implements Row {
+public abstract class AbstractGroupOfCells implements CellSolvedListener, GroupOfCells {
 
-    private final List<Cell> cells;
+    protected final List<Cell> cells;
 
-    AbstractRow(List<Cell> cells) {
+    AbstractGroupOfCells(List<Cell> cells) {
+
+        if (cells.size() != 9) {
+            throw new IllegalArgumentException("Exactly nine cells expected");
+        }
 
         this.cells = new ArrayList<>(cells);
         cells.forEach(cell -> cell.addListener(this));

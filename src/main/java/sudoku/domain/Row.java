@@ -1,5 +1,6 @@
 package sudoku.domain;
 
-public interface Row extends GroupOfCells, CellSolvedListener {
+public interface Row extends GroupOfCells {
 
+    String toString(String delimiter);
 }
