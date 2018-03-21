@@ -1,6 +1,8 @@
 package sudoku.domain;
 
 
+import java.util.Collection;
+
 /**
  * Interface for single cell in sudoku game board. Cell is either unresolved with specific possible numbers remaining or cell is resolved with specific number.
  *
@@ -30,4 +32,11 @@ public interface Cell {
      * Add listener which will be notified when cell resolves.
      */
     void addListener(CellSolvedListener listener);
+
+    /**
+     * Returns possible numbers for this cell
+     */
+    Collection<Integer> getPossibilities();
+
+    boolean containsPossibility(Integer number);
 }

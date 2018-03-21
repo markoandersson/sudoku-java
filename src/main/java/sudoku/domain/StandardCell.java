@@ -10,7 +10,7 @@ public class StandardCell implements Cell {
     private final List<Integer> possibilities;
     private Collection<CellSolvedListener> listeners = new ArrayList<>();
 
-    StandardCell() {
+    public StandardCell() {
         this.possibilities = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
     }
 
@@ -40,8 +40,13 @@ public class StandardCell implements Cell {
         return possibilities.size() == 1;
     }
 
-    Collection<Integer> getPossibilities() {
+    public Collection<Integer> getPossibilities() {
         return Collections.unmodifiableCollection(this.possibilities);
+    }
+
+    @Override
+    public boolean containsPossibility(Integer number) {
+        return getPossibilities().contains(number);
     }
 
     @Override

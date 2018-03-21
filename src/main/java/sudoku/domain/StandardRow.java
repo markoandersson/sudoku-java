@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class StandardRow extends AbstractRow{
 
-    StandardRow(List<Cell> cells) {
+    public StandardRow(List<Cell> cells) {
         super(cells);
 
         if (cells.size() != 9) {

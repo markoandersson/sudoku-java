@@ -1,4 +1,5 @@
 package sudoku.domain;
 
-public interface Row extends CellSolvedListener {
+public interface Row extends GroupOfCells, CellSolvedListener {
+
 }
