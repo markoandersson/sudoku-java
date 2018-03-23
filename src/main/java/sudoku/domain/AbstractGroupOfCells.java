@@ -1,7 +1,6 @@
 package sudoku.domain;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,7 +43,7 @@ public abstract class AbstractGroupOfCells implements CellSolvedListener, GroupO
                 .collect(Collectors.joining(","));
     }
 
-    public Collection<Cell> getCells() {
+    public List<Cell> getCells() {
         return Collections.unmodifiableList(this.cells);
     }
 }

@@ -34,6 +34,35 @@ public class BoardUtils {
 
     }
 
+    public static List<Grid> buildGrids(List<List<Cell>> board) {
+        List<Grid> grids = new ArrayList<>();
+
+        for (int rowIndex = 0; rowIndex < 9; rowIndex+=3) {
+
+            List<List<Cell>> rows = board.subList(rowIndex, rowIndex+3);
+
+            for (int colIndex = 0; colIndex < 9; colIndex += 3) {
+                grids.add(getGridCells(rows, colIndex));
+
+            }
+        }
+
+        return grids;
+    }
+
+    private static Grid getGridCells(List<List<Cell>> rows, int colIndex) {
+
+        List<Cell> cells = new ArrayList<>();
+        for (List<Cell> row : rows) {
+
+            List<Cell> rowCells = row.subList(colIndex, colIndex + 3);
+            cells.addAll(rowCells);
+        }
+
+        return new StandardGrid(cells);
+
+    }
+
     public static String printBoard(StandardBoard standardBoard) {
         StringBuilder sb = new StringBuilder();
 
@@ -61,5 +90,4 @@ public class BoardUtils {
         Arrays.fill(chars, '-');
         return new String(chars);
     }
-
 }

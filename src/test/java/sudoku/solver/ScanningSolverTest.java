@@ -2,6 +2,8 @@ package sudoku.solver;
 
 import org.junit.Test;
 import sudoku.CellBuilder;
+import sudoku.board.StandardBoard;
+import sudoku.board.TestBoards;
 import sudoku.domain.Cell;
 import sudoku.domain.Row;
 import sudoku.domain.StandardCell;
@@ -54,6 +56,17 @@ public class ScanningSolverTest {
 
         assertThat(secondCellWithAllPossibilities.isSolved())
                 .isFalse();
+
+    }
+
+    @Test
+    public void shouldSolveBoard() {
+
+        StandardBoard easy = TestBoards.easy;
+
+        easy.accept(new ScanningSolverVisitor());
+
+        System.out.println(easy);
 
     }
 }
