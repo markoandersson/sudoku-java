@@ -28,4 +28,9 @@ public class StandardRow extends AbstractGroupOfCells implements Row {
         return sb.toString();
 
     }
+
+    @Override
+    public void accept(SolverVisitor solver) {
+        solver.solve(this);
+    }
 }

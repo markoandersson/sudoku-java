@@ -7,4 +7,9 @@ public class StandardColumn extends AbstractGroupOfCells implements Column {
     public StandardColumn(List<Cell> cells) {
         super(cells);
     }
+
+    @Override
+    public void accept(SolverVisitor solver) {
+        solver.solve(this);
+    }
 }

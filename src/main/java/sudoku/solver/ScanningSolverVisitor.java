@@ -2,7 +2,9 @@ package sudoku.solver;
 
 import org.apache.commons.math3.stat.Frequency;
 import sudoku.domain.Cell;
-import sudoku.domain.GroupOfCellsSolver;
+import sudoku.domain.StandardColumn;
+import sudoku.domain.StandardGrid;
+import sudoku.domain.StandardRow;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -20,10 +22,25 @@ import java.util.Iterator;
  * Cell 2 could be solved with number 5
  * </pre>
  */
-public class ScanningSolver implements GroupOfCellsSolver {
+public class ScanningSolverVisitor extends SolverVisitorAdapter {
+
 
     @Override
-    public void solve(Collection<Cell> cells) {
+    public void solve(StandardRow row) {
+        solve(row.getCells());
+    }
+
+    @Override
+    public void solve(StandardColumn column) {
+        solve(column.getCells());
+    }
+
+    @Override
+    public void solve(StandardGrid grid) {
+        solve(grid.getCells());
+    }
+
+    private void solve(Collection<Cell> cells) {
 
         Frequency freq = calculateFrequencyForPossibilitiesInCells(cells);
 

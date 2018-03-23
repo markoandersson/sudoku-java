@@ -25,7 +25,7 @@ public class ScanningSolverTest {
 
         Row row = new StandardRow(cells);
 
-        row.solve(new ScanningSolver());
+        row.accept(new ScanningSolverVisitor());
 
         assertThat(cellWithAllPossibilities.isSolved())
                 .as("Cell should be solved as it's the only cell having number 5 as possibility")
@@ -47,7 +47,7 @@ public class ScanningSolverTest {
 
         Row row = new StandardRow(cells);
 
-        row.solve(new ScanningSolver());
+        row.accept(new ScanningSolverVisitor());
 
         assertThat(firstCellWithAllPossibilities.isSolved())
                 .isFalse();

@@ -1,11 +1,10 @@
 package sudoku.domain;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static java.util.Collections.unmodifiableCollection;
 
 /**
  * Abstract row which contains generic functionality for row, not dependent on exact type of game board.
@@ -25,17 +24,12 @@ public abstract class AbstractGroupOfCells implements CellSolvedListener, GroupO
 
     }
 
+    @Override
     public void cellSolved(int resolvedNumber) {
 
         cells.stream()
                 .filter(cell -> !cell.isSolved())
                 .forEach(cell -> cell.removePossibility(resolvedNumber));
-    }
-
-    @Override
-    public void solve(GroupOfCellsSolver solver) {
-
-        solver.solve(unmodifiableCollection(this.cells));
     }
 
     @Override
@@ -50,4 +44,7 @@ public abstract class AbstractGroupOfCells implements CellSolvedListener, GroupO
                 .collect(Collectors.joining(","));
     }
 
+    public Collection<Cell> getCells() {
+        return Collections.unmodifiableList(this.cells);
+    }
 }
