@@ -2,7 +2,7 @@ package sudoku.solver;
 
 import org.junit.Test;
 import sudoku.CellBuilder;
-import sudoku.board.StandardBoard;
+import sudoku.board.Board;
 import sudoku.board.TestBoards;
 import sudoku.domain.Cell;
 import sudoku.domain.Row;
@@ -60,13 +60,22 @@ public class ScanningSolverTest {
     }
 
     @Test
-    public void shouldSolveBoard() {
+    public void shouldScanAndSolve() {
 
-        StandardBoard easy = TestBoards.easy;
+        Board medium = TestBoards.medium();
+        ScanningSolverVisitor scanningSolverVisitor = new ScanningSolverVisitor();
 
-        easy.accept(new ScanningSolverVisitor());
+        assertThat(medium.isSolved())
+                .isFalse();
 
-        System.out.println(easy);
+        medium.accept(scanningSolverVisitor);
 
+        assertThat(medium.isSolved())
+                .isFalse();
+
+        medium.accept(scanningSolverVisitor);
+
+        assertThat(medium.isSolved())
+                .isTrue();
     }
 }

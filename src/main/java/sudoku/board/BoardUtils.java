@@ -5,8 +5,23 @@ import sudoku.domain.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class BoardUtils {
+
+    public static List<List<Cell>> buildCells() {
+
+        return Stream.generate(BoardUtils::generateCells)
+                .limit(9)
+                .collect(Collectors.toList());
+    }
+
+    private static List<Cell> generateCells() {
+        return Stream.generate(StandardCell::new)
+                .limit(9)
+                .collect(Collectors.toList());
+    }
 
     public static List<Row> buildRows(List<List<Cell>> board) {
         List<Row> rows = new ArrayList<>();

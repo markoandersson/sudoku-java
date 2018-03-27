@@ -40,6 +40,7 @@ public class StandardCell implements Cell {
         return possibilities.size() == 1;
     }
 
+    @Override
     public Collection<Integer> getPossibilities() {
         if (isSolved()) {
             return Collections.emptyList();
