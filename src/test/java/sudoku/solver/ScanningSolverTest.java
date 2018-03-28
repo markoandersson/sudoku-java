@@ -78,4 +78,38 @@ public class ScanningSolverTest {
         assertThat(medium.isSolved())
                 .isTrue();
     }
+
+    @Test
+    public void solveHard() {
+
+        Board hard = TestBoards.hard();
+
+        assertThat(hard.isSolved())
+                .isFalse();
+
+        ScanningSolverVisitor scanningSolverVisitor = new ScanningSolverVisitor();
+
+        hard.accept(scanningSolverVisitor);
+
+        assertThat(hard.isSolved())
+                .isTrue();
+    }
+
+    @Test
+    public void trySolvingEvilBoard() {
+
+        Board evil = TestBoards.evil();
+
+        assertThat(evil.isSolved())
+                .isFalse();
+
+        ScanningSolverVisitor scanningSolverVisitor = new ScanningSolverVisitor();
+
+        for (int i = 0; i < 10; i++) {
+            evil.accept(scanningSolverVisitor);
+        }
+
+        assertThat(evil.isSolved())
+                .isFalse();
+    }
 }
