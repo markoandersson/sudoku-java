@@ -27,12 +27,13 @@ public class ScanningSolverTest {
 
         Row row = new StandardRow(cells);
 
-        row.accept(new ScanningSolverVisitor());
+        ScanningSudokuVisitor solver = new ScanningSudokuVisitor();
 
-        assertThat(cellWithAllPossibilities.isSolved())
-                .as("Cell should be solved as it's the only cell having number 5 as possibility")
-                .isTrue();
+        row.accept(solver);
 
+        assertThat(solver.getActions())
+                .hasSize(1)
+                .contains(new SolveCellAction(cellWithAllPossibilities, 5));
     }
 
     @Test
@@ -49,7 +50,12 @@ public class ScanningSolverTest {
 
         Row row = new StandardRow(cells);
 
-        row.accept(new ScanningSolverVisitor());
+        ScanningSudokuVisitor solver = new ScanningSudokuVisitor();
+
+        row.accept(solver);
+
+        assertThat(solver.getActions())
+                .isEmpty();
 
         assertThat(firstCellWithAllPossibilities.isSolved())
                 .isFalse();
@@ -63,53 +69,34 @@ public class ScanningSolverTest {
     public void shouldScanAndSolve() {
 
         Board medium = TestBoards.medium();
-        ScanningSolverVisitor scanningSolverVisitor = new ScanningSolverVisitor();
+        ScanningSudokuVisitor scanningSolverVisitor = new ScanningSudokuVisitor();
 
         assertThat(medium.isSolved())
                 .isFalse();
 
         medium.accept(scanningSolverVisitor);
 
-        assertThat(medium.isSolved())
-                .isFalse();
-
-        medium.accept(scanningSolverVisitor);
-
-        assertThat(medium.isSolved())
-                .isTrue();
+        assertThat(scanningSolverVisitor.getActions())
+                .hasSize(13);
     }
 
     @Test
-    public void solveHard() {
+    public void solveMediumBoardWithThreePasses() {
 
-        Board hard = TestBoards.hard();
+        Board board = TestBoards.medium();
+        ScanningSudokuVisitor visitor = new ScanningSudokuVisitor();
 
-        assertThat(hard.isSolved())
-                .isFalse();
+        board.accept(visitor);
+        visitor.getActions().execute(board);
 
-        ScanningSolverVisitor scanningSolverVisitor = new ScanningSolverVisitor();
+        board.accept(visitor);
+        visitor.getActions().execute(board);
 
-        hard.accept(scanningSolverVisitor);
+        board.accept(visitor);
+        visitor.getActions().execute(board);
 
-        assertThat(hard.isSolved())
+        assertThat(board.isSolved())
+                .as("Three scans should solve the board")
                 .isTrue();
-    }
-
-    @Test
-    public void trySolvingEvilBoard() {
-
-        Board evil = TestBoards.evil();
-
-        assertThat(evil.isSolved())
-                .isFalse();
-
-        ScanningSolverVisitor scanningSolverVisitor = new ScanningSolverVisitor();
-
-        for (int i = 0; i < 10; i++) {
-            evil.accept(scanningSolverVisitor);
-        }
-
-        assertThat(evil.isSolved())
-                .isFalse();
     }
 }

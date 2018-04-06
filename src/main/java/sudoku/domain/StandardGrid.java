@@ -9,7 +9,7 @@ public class StandardGrid extends AbstractGroupOfCells implements Grid {
     }
 
     @Override
-    public void accept(SolverVisitor solver) {
-        solver.solve(this);
+    public void accept(SudokuVisitor visitor) {
+        visitor.visit(this);
     }
 }

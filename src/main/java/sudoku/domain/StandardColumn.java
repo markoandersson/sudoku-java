@@ -9,7 +9,7 @@ public class StandardColumn extends AbstractGroupOfCells implements Column {
     }
 
     @Override
-    public void accept(SolverVisitor solver) {
-        solver.solve(this);
+    public void accept(SudokuVisitor visitor) {
+        visitor.visit(this);
     }
 }

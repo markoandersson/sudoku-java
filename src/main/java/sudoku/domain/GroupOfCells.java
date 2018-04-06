@@ -5,7 +5,7 @@ package sudoku.domain;
  */
 public interface GroupOfCells {
 
-    void accept(SolverVisitor solver);
+    void accept(SudokuVisitor solver);
 
     /**
      * Return true if this group of cells has been solved

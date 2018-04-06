@@ -54,6 +54,10 @@ public class StandardCell implements Cell {
     }
 
     @Override
+    public void accept(final SudokuVisitor visitor) {
+        visitor.visit(this);
+    }
+
     public void solve(int number) {
 
         this.possibilities.removeIf(possibility -> possibility != number);

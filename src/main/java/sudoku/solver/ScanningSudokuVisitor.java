@@ -22,25 +22,25 @@ import java.util.Iterator;
  * Cell 2 could be solved with number 5
  * </pre>
  */
-public class ScanningSolverVisitor extends SolverVisitorAdapter {
+public class ScanningSudokuVisitor extends SudokuVisitorAdapter {
 
 
     @Override
-    public void solve(StandardRow row) {
-        solve(row.getCells());
+    public void visit(StandardRow row) {
+        visit(row.getCells());
     }
 
     @Override
-    public void solve(StandardColumn column) {
-        solve(column.getCells());
+    public void visit(StandardColumn column) {
+        visit(column.getCells());
     }
 
     @Override
-    public void solve(StandardGrid grid) {
-        solve(grid.getCells());
+    public void visit(StandardGrid grid) {
+        visit(grid.getCells());
     }
 
-    private void solve(Collection<Cell> cells) {
+    private void visit(Collection<Cell> cells) {
 
         Frequency freq = calculateFrequencyForPossibilitiesInCells(cells);
 
@@ -61,7 +61,6 @@ public class ScanningSolverVisitor extends SolverVisitorAdapter {
             if (frequency == 1) {
                 solveCellWithPossibility(cells, number);
             }
-
         }
     }
 
@@ -69,7 +68,7 @@ public class ScanningSolverVisitor extends SolverVisitorAdapter {
 
         cells.stream()
                 .filter(cell -> cell.containsPossibility(number.intValue()))
-                .forEach(cell -> cell.solve(number.intValue()));
+                .forEach(cell -> addAction(new SolveCellAction(cell, number.intValue())));
     }
 
     /**

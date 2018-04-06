@@ -1,9 +1,9 @@
 package sudoku.board;
 
-import sudoku.solver.ScanningSolverVisitor;
+import sudoku.domain.SudokuVisitor;
 
 public interface Board {
-    void accept(ScanningSolverVisitor solverVisitor);
+    void accept(SudokuVisitor visitor);
 
     boolean isSolved();
 }

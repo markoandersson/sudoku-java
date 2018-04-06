@@ -1,14 +1,9 @@
 package sudoku.board;
 
-import sudoku.domain.Cell;
-import sudoku.domain.Column;
-import sudoku.domain.Grid;
-import sudoku.domain.Row;
-import sudoku.solver.ScanningSolverVisitor;
+import sudoku.domain.*;
+import sudoku.solver.SolveCellAction;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class StandardBoard implements Board {
@@ -51,7 +46,7 @@ public class StandardBoard implements Board {
     private void solveIfNumber(String number, Cell cell) {
         if (!Objects.isNull(number) && Character.isDigit(number.charAt(0))) {
             if (!"0".equals(number)) {
-                cell.solve(Integer.parseInt(number));
+                accept(new SolveCellAction(cell, Integer.parseInt(number)));
             }
         }
     }
@@ -75,11 +70,12 @@ public class StandardBoard implements Board {
     }
 
     @Override
-    public void accept(ScanningSolverVisitor solverVisitor) {
+    public void accept(SudokuVisitor visitor) {
 
-        this.rows.forEach(row -> row.accept(solverVisitor));
-        this.columns.forEach(column -> column.accept(solverVisitor));
-        this.grids.forEach(grid -> grid.accept(solverVisitor));
+        this.rows.forEach(row -> row.accept(visitor));
+        this.columns.forEach(column -> column.accept(visitor));
+        this.grids.forEach(grid -> grid.accept(visitor));
+        this.cells.forEach(cell -> cell.accept(visitor));
     }
 
     @Override

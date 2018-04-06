@@ -4,7 +4,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -73,7 +72,7 @@ public class StandardCellTest {
     public void shouldSolveInstantly() {
 
         CellSolvedListener mockNotifyListener = mock(CellSolvedListener.class);
-        Cell cell = new StandardCell();
+        StandardCell cell = new StandardCell();
         cell.addListener(mockNotifyListener);
 
         cell.solve(1);

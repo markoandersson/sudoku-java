@@ -24,11 +24,6 @@ public interface Cell {
     void removePossibility(Integer number);
 
     /**
-     * Solve cell with number. Triggers all listeners.
-     */
-    void solve(int number);
-
-    /**
      * Add listener which will be notified when cell resolves.
      */
     void addListener(CellSolvedListener listener);
@@ -39,4 +34,6 @@ public interface Cell {
     Collection<Integer> getPossibilities();
 
     boolean containsPossibility(Integer number);
+
+    void accept(SudokuVisitor visitor);
 }

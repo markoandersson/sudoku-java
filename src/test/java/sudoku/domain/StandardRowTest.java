@@ -9,7 +9,6 @@ import sudoku.CellBuilder;
 import java.util.Collections;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -64,7 +63,7 @@ public class StandardRowTest {
 
         StandardRow row = new StandardRow(cells);
 
-        cells.get(2).solve(5);
+        ((StandardCell)cells.get(2)).solve(5);
 
         Mockito.verify(cell).removePossibility(5);
     }
@@ -79,15 +78,15 @@ public class StandardRowTest {
         assertThat(row.isSolved())
                 .isFalse();
 
-        cells.get(0).solve(1);
-        cells.get(1).solve(2);
-        cells.get(2).solve(3);
-        cells.get(3).solve(4);
-        cells.get(4).solve(5);
-        cells.get(5).solve(6);
-        cells.get(6).solve(7);
-        cells.get(7).solve(8);
-        cells.get(8).solve(9);
+        ((StandardCell)cells.get(0)).solve(1);
+        ((StandardCell)cells.get(1)).solve(2);
+        ((StandardCell)cells.get(2)).solve(3);
+        ((StandardCell)cells.get(3)).solve(4);
+        ((StandardCell)cells.get(4)).solve(5);
+        ((StandardCell)cells.get(5)).solve(6);
+        ((StandardCell)cells.get(6)).solve(7);
+        ((StandardCell)cells.get(7)).solve(8);
+        ((StandardCell)cells.get(8)).solve(9);
 
         assertThat(row.isSolved())
                 .isTrue();
